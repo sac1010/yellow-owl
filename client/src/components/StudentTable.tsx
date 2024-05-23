@@ -71,7 +71,7 @@ const columns = [
     header: () => "Date Of Admission",
   }),
   columnHelper.accessor("id", {
-    cell: (info) => (
+    cell: () => (
       <div className="flex gap-4">
         <button>
           <img src="/edit.svg" className="h-3 w-3" alt="edit" />
@@ -87,7 +87,6 @@ const columns = [
 
 function StudentTable() {
   const [data, _setData] = React.useState(() => [...defaultData]);
-  const rerender = React.useReducer(() => ({}), {})[1];
 
   const table = useReactTable({
     data,
