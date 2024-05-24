@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import StudentTable from "./components/StudentTable";
 
+
 function App() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   return (
