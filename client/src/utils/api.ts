@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000' ;
+const BASE_URL =  "https://yellow-owl.onrender.com/" ;
 
 const api = axios.create({
   baseURL: BASE_URL,
