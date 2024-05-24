@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000' ;
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -9,7 +9,7 @@ const api = axios.create({
 const apiFunctions = {
   getStudents: async () => {
     try {
-      const response = await api.get('/students');
+      const response = await api.get('api/students');
       return response.data;
     } catch (error) {
       console.error('Error fetching students:', error);
@@ -19,17 +19,19 @@ const apiFunctions = {
 
   addStudent: async (studentData:any) => {
     try {
-      const response = await api.post('/students', studentData);
+      const response = await api.post('api/students', studentData);
+      console.log(response.status, "status")
+      console.log(response, "response")
       return response.data;
     } catch (error) {
-      console.error('Error adding student:', error);
+      console.log('Error adding student:', error);
       throw error;
     }
   },
 
   updateStudent: async (studentId:number, updatedData:any) => {
     try {
-      const response = await api.put(`/students/${studentId}`, updatedData);
+      const response = await api.put(`api/students/${studentId}`, updatedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating student with ID ${studentId}:`, error);
@@ -39,7 +41,7 @@ const apiFunctions = {
 
   deleteStudent: async (studentId:number) => {
     try {
-      const response = await api.delete(`/students/${studentId}`);
+      const response = await api.delete(`api/students/${studentId}`);
       return response.data;
     } catch (error) {
       console.error(`Error deleting student with ID ${studentId}:`, error);
