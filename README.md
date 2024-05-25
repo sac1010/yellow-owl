@@ -87,4 +87,4 @@ Base URL: http://localhost:3000/api
 - react-table
 
 # Screenshots
-![Screenshot 1](public/scr.png)
+![Screenshot 1](client/public/scr.png)
