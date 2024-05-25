@@ -4,7 +4,7 @@ import AddStudent from "./components/AddStudent";
 import Modal from "./components/Modal";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import StudentTable from "./components/StudentTable";
+import StudentTable, { Student } from "./components/StudentTable";
 import api from "./utils/api";
 import Loader from "./components/Loader";
 
@@ -12,6 +12,7 @@ function App() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [studentsData, setStudentsData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
 
   const getData = async () => {
     try {
@@ -27,6 +28,13 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  const filteredStudents = studentsData.filter(
+    (student: Student) =>
+      student.name.toLowerCase().includes(search.toLowerCase()) ||
+      student.enrollment.toString().includes(search)
+  );
+
   return (
     <div className="w-full grid grid-cols-12">
       <div className="col-span-2">
@@ -41,6 +49,8 @@ function App() {
             </div>
             <div>
               <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 className="md:w-[250px] w-[170px] px-4 border border-gray-300 h-10"
                 placeholder="Search..."
                 type="text"
@@ -53,7 +63,7 @@ function App() {
               </button>
             </div>
           </div>
-          <StudentTable updateData={getData} studentsData={studentsData} />
+          <StudentTable updateData={getData} studentsData={filteredStudents} />
         </div>
       </div>
       <Modal onClose={() => setIsAddModalOpen(false)} isOpen={isAddModalOpen}>
@@ -62,7 +72,7 @@ function App() {
           onClose={() => setIsAddModalOpen(false)}
         />
       </Modal>
-      {loading && <Loader/>}
+      {loading && <Loader />}
     </div>
   );
 }
